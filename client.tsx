@@ -9,7 +9,7 @@ export function App() {
   );
 }
 
-// run only on client side
+// run on client side only
 if (globalThis["document"]) {
   ReactDOM.hydrateRoot(document.getElementById("root")!, <App />);
 }
