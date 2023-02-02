@@ -1,7 +1,13 @@
 import express from "express";
 import ReactDOMServer from "react-dom/server";
+import path from "path";
+import { App } from "./client";
 
 express()
+  // serve client side code
+  .use(express.static(path.resolve(__dirname, "dist")))
+
+  // serve index.html
   .get("/", (_, res) => {
     const html = ReactDOMServer.renderToString(
       <html>
@@ -9,7 +15,10 @@ express()
           <title>SSR Example</title>
         </head>
         <body>
-          <div id="root">Hello, Server Side Rendering!</div>
+          <div id="root">
+            <App />
+          </div>
+          <script src="bundle.js"></script>
         </body>
       </html>
     );
